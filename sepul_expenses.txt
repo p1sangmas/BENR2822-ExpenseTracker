@@ -1,0 +1,2 @@
+racket,32.0,sports
+cabbage,23.0,vege

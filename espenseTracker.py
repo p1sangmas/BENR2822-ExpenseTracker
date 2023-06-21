@@ -1,24 +1,32 @@
+# import os is for checking if file exists in the system
+import os
+
+# Class User is for creating a user object
 class User:
     def __init__(self, username, password):
         self.username = username
         self.password = password
         self.expenses = []
 
+    # add_expense() is for adding an expense object to the expenses list
     def add_expense(self, expense):
         self.expenses.append(expense)
 
+    # delete_expense() is for deleting an expense object from the expenses list
     def delete_expense(self, expense):
         self.expenses.remove(expense)
 
+    # display_expenses() is for displaying all the expense objects in the expenses list
     def display_expenses(self):
         for expense in self.expenses:
             print(expense)
 
+    # generate_report() is for generating a report of all the expenses in the expenses list
     def generate_report(self):
         total_expenses = sum(expense.amount for expense in self.expenses)
-        print("Total Expenses: $", total_expenses)
+        print("\nTotal Expenses: RM", total_expenses)
 
-
+# Class Expense is for creating an expense object
 class Expense:
     def __init__(self, name, amount, category):
         self.name = name
@@ -28,53 +36,58 @@ class Expense:
     def __str__(self):
         return f"Name: {self.name}\nAmount: ${self.amount}\nCategory: {self.category}\n"
 
-
+# create_account() is for creating a user object
 def create_account():
     username = input("Enter username: ")
     password = input("Enter password: ")
     return User(username, password)
 
-
+# login() is for logging in a user
 def login(users):
     username = input("Enter username: ")
     password = input("Enter password: ")
 
+    # for loop is for checking if the username and password is in the users list
     for user in users:
         if user.username == username and user.password == password:
             return user
 
     return None
 
-
+# read_expenses() is for reading the expenses from the file
 def read_expenses(user):
     filename = f"{user.username}_expenses.txt"
-    try:
+
+    #os.path.isfile() is for checking if the file exists in the system
+    if os.path.isfile(filename):
         with open(filename, "r") as file:
             for line in file:
                 name, amount, category = line.strip().split(",")
                 expense = Expense(name, float(amount), category)
                 user.add_expense(expense)
-    except FileNotFoundError:
-        print("File does not exist!")
+    else:
+        print("\nFile does not exist!\n")
 
-
+# write_expenses() is for writing the expenses to the file
 def write_expenses(user):
     filename = f"{user.username}_expenses.txt"
     with open(filename, "w") as file:
         for expense in user.expenses:
             file.write(f"{expense.name},{expense.amount},{expense.category}\n")
 
-
+# display_menu() is for displaying the menu
 def display_menu():
-    print("Expense Tracker Menu:")
+    print("\nExpense Tracker Menu:")
     print("1. Add Expense")
     print("2. Delete Expense")
     print("3. Display Expenses")
     print("4. Generate Report")
     print("5. Exit")
 
-
+# main() is for running the program
 def main():
+
+    # users list is for storing all the user objects
     users = []
 
     while True:
@@ -93,7 +106,7 @@ def main():
         elif choice == "2":
             user = login(users)
             if user:
-                print("Login successful!")
+                print("Login successful!\n")
                 read_expenses(user)
                 while True:
                     display_menu()
@@ -101,7 +114,7 @@ def main():
 
                     if choice == "1":
                         name = input("Enter expense name: ")
-                        amount = float(input("Enter expense amount: "))
+                        amount = float(input("Enter expense amount (RM): "))
                         category = input("Enter expense category: ")
                         expense = Expense(name, amount, category)
                         user.add_expense(expense)
