@@ -1,4 +1,2 @@
-1,Food Expense,25.5,2023-06-01,Food
-2,Transportation Expense,10.0,2023-06-02,Transportation
-3,Utility Bill,75.2,2023-06-02,Bills
-4,Entertainment Expense,15.0,2023-06-03,Entertainment
+1,balls,34.0,2023-04-21,sport
+2,jag,14.0,2023-23-23,hjaf

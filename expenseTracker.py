@@ -1,3 +1,4 @@
+#import os is for the file handling (check path/directory operations)
 import os
 
 class Expense:
@@ -28,7 +29,7 @@ class ExpenseTracker:
             print("File does not exist!")
         return expenses
     
-    # Function to write expenses to file
+    # Function to export expenses to .txt file
     def write_expenses(self):
         with open('expenses.txt', 'w') as file:
             for expense in self.expenses:
@@ -45,6 +46,7 @@ class ExpenseTracker:
         expense_id = 1 if len(self.expenses) == 0 else self.expenses[-1].id + 1
         expense = Expense(expense_id, description, amount, date, category)
         self.expenses.append(expense)
+        # The added expenses will be automatically added to the .txt file
         self.write_expenses()
         print("Expense added successfully!")
 
@@ -69,7 +71,7 @@ class ExpenseTracker:
             print(expense)
         print()
 
-    # Function to generate expense reports
+    # Function to generate expense reports (total expenses)
     def generate_report(self):
         category = input("Enter the category to generate the report (leave blank for all categories): ")
         total_expenses = 0
