@@ -34,7 +34,7 @@ class Expense:
         self.category = category
 
     def __str__(self):
-        return f"Name: {self.name}\nAmount: ${self.amount}\nCategory: {self.category}\n"
+        return f"Name: {self.name}\nAmount: RM{self.amount}\nCategory: {self.category}\n"
 
 # create_account() is for creating a user object
 def create_account():
@@ -62,6 +62,7 @@ def read_expenses(user):
     if os.path.isfile(filename):
         with open(filename, "r") as file:
             for line in file:
+                # line.strip().split(",") is for splitting the line into 3 parts
                 name, amount, category = line.strip().split(",")
                 expense = Expense(name, float(amount), category)
                 user.add_expense(expense)
@@ -82,7 +83,7 @@ def display_menu():
     print("2. Delete Expense")
     print("3. Display Expenses")
     print("4. Generate Report")
-    print("5. Exit")
+    print("5. Back to Home Screen")
 
 # main() is for running the program
 def main():
@@ -91,7 +92,7 @@ def main():
     users = []
 
     while True:
-        print("Expense Tracker")
+        print("Main Menu:")
         print("1. Create Account")
         print("2. Login")
         print("3. Exit")
@@ -132,16 +133,16 @@ def main():
                             print("Invalid expense index!")
                         print("---------------------------")
                     elif choice == "3":
-                        print("Your Expenses:")
+                        print("\nYour Expenses:")
                         user.display_expenses()
                         print("---------------------------")
                     elif choice == "4":
-                        print("Expense Report:")
+                        print("\nTotal Expense Report:")
                         user.generate_report()
                         print("---------------------------")
                     elif choice == "5":
                         write_expenses(user)
-                        print("Expenses saved to file.")
+                        print("\nExpenses saved to file.")
                         break
                     else:
                         print("Invalid choice!")
