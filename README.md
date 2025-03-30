@@ -95,10 +95,6 @@ This application does not require any external libraries. It uses Python's built
 
 If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. Contributions are welcome!
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ## Author
 
 Developed by Fakhrul Fauzi.
